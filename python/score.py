@@ -1,6 +1,7 @@
-import _PyPacwar
+from _PyPacwar import battle
 
-def score(rounds, left_survive, right_survive):
+def score(left, right):
+	rounds, left_survive, right_survive = battle(left, right)
 	left = 0 if left_survive > right_survive else 1
 	right = 1 - left
 
@@ -19,7 +20,7 @@ def score(rounds, left_survive, right_survive):
 		return lt_200[left], lt_200[right]
 	elif rounds < 300:
 		return lt_300[left], lt_300[right]
-	elif rounds <= 500:
+	elif rounds < 500:
 		return lt_500[left], lt_500[right]
 	else:
 		ratio = left_survive * 1.0 / right_survive if left_survive > right_survive else right_survive * 1.0 / left_survive
