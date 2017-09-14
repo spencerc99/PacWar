@@ -1,0 +1,10 @@
+This works for all Macbook Pro versions after mid 2012 and Mac OS version higher than 10.9. The core logic for the pac war is based on the C source file PacWarGuts.c. In order to use it in Java, we need to build a lib file which is the libPacWarGuts.jnilib from the C file. In case you want to somehow modify the C source file and rebuild the libPacWarGuts.jnilib, Here is how you can do this in mac os:
+
+1. You first need to locate your JDK in your laptop. For my laptop, the JDK will live in /Library/Java/JavaVirtualMachines/jdk1.7.0_75.jdk/Contents/Home/
+2. Change the directory to the C source file in your terminal
+3. Run the following command: 
+cc -c -I/Library/Java/JavaVirtualMachines/jdk1.7.0_75.jdk/Contents/Home/include/ -I/Library/Java/JavaVirtualMachines/jdk1.7.0_75.jdk/Contents/Home/include/darwin/ PacWarGuts.c
+cc -dynamiclib -o libPacWarGuts.jnilib PacWarGuts.o -framework JavaVM
+
+Basically,the -I flag tells Clang compiler where to find the include files, namely jni.h and jni_md.h.
+

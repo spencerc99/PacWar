@@ -1,0 +1,9 @@
+# This is an example PacWar python interface for comp440.
+#	To compile the example code, you need to run:
+#		python setup.py build_ext --inplace
+# 		python PyPacwarExample.py
+#
+# NOTE: This interface needs numpy.
+# This interface was build using the tutorial found here
+# 		   http://dan.iel.fm/posts/python-c-extensions/
+
