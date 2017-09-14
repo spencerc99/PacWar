@@ -1,5 +1,3 @@
-import _PyPacwar
-
 def score(rounds, left_survive, right_survive):
 	left = 0 if left_survive > right_survive else 1
 	right = 1 - left
