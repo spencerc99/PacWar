@@ -23,6 +23,8 @@ def score(left, right):
 	elif rounds < 500:
 		return lt_500[left], lt_500[right]
 	else:
+		if right_survive == 0 or left_survive == 0:
+			return lt_500[left], lt_500[right]
 		ratio = left_survive * 1.0 / right_survive if left_survive > right_survive else right_survive * 1.0 / left_survive
 		if ratio > 10:
 			return gt_10[left], gt_10[right]
