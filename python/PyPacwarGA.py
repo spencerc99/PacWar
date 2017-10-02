@@ -74,9 +74,9 @@ def mutate(population, mutation_pct):
                 indiv[i] += 1 % 4 # moves it to the right one
 
 def main():
-    iterations = 100
-    population = initial_state(100)
-    other_indiv = [1] * 50
+    iterations = 75
+    population = initial_state(200)
+    other_indiv = [3] * 50
     crossover_pct = 1
     mutation_pct = .005
     for i in xrange(iterations):
@@ -87,9 +87,11 @@ def main():
         population += keep
         mutate(population, mutation_pct)
 
-    scores = [score(indiv, other_indiv) for indiv in population]
+    scores = [score(indiv, other_indiv)[0] for indiv in population]
     # print population
     print scores
-    print max(scores)
+    idx, found_max_score = max(enumerate(scores), key=lambda x: x[1])
+    print "Population with max score: ", population[idx]
+    print "Max score", found_max_score
 
 if __name__ == "__main__": main()
