@@ -1,5 +1,8 @@
 from _PyPacwar import battle
 
+def battle_score(candidate):
+	pass
+
 def score(left, right):
 	rounds, left_survive, right_survive = battle(left, right)
 	left = 0 if left_survive > right_survive else 1
