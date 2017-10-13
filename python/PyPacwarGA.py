@@ -74,18 +74,18 @@ def mutate(population, mutation_pct):
                 indiv[i] += 1 % 4 # moves it to the right one
 
 def score_func(indiv, other_indiv):
-    return score(indiv, other_indiv)
-    # return battle_score(indiv)
+    # return score(indiv, other_indiv)
+    return battle_score(indiv)
 
 def main(storing=False):
-    iterations = 75
+    iterations = 25
     population = initial_state(200)
     other_indiv = [[gene]*50 for gene in gene_options]
     crossover_pct = 1
     mutation_pct = .005
     for i in xrange(iterations):
         scores = [score_func(indiv, other_indiv) for indiv in population] # Only caring about our score
-        # print max(scores)
+        print max(scores)
         population, keep = normal_selection(population, scores)
         population = crossover(population, crossover_pct)
         population += keep
@@ -105,5 +105,6 @@ def store(candidate):
         f.write(' '.join([str(gene) for gene in candidate]) + "\n")
 
 if __name__ == "__main__":
-    for i in range(10):
-        main(True)
+    # for i in range(10):
+    #     main(True)
+    main()
