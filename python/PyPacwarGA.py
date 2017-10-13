@@ -1,7 +1,7 @@
 import _PyPacwar
 import numpy
 import random
-from score import score
+from score import score, battle_score
 
 gene_options = [0, 1, 2, 3]
 
@@ -73,6 +73,10 @@ def mutate(population, mutation_pct):
             if random.random() < mutation_pct:
                 indiv[i] += 1 % 4 # moves it to the right one
 
+def score_func(indiv, other_indiv):
+    return score(indiv, other_indiv)
+    # return battle_score(indiv)
+
 def main(storing=False):
     iterations = 75
     population = initial_state(200)
@@ -80,14 +84,14 @@ def main(storing=False):
     crossover_pct = 1
     mutation_pct = .005
     for i in xrange(iterations):
-        scores = [score(indiv, other_indiv) for indiv in population] # Only caring about our score
-        print max(scores)
+        scores = [score_func(indiv, other_indiv) for indiv in population] # Only caring about our score
+        # print max(scores)
         population, keep = normal_selection(population, scores)
         population = crossover(population, crossover_pct)
         population += keep
         mutate(population, mutation_pct)
 
-    scores = [score(indiv, other_indiv) for indiv in population]
+    scores = [score_func(indiv, other_indiv) for indiv in population]
     # print population
     print scores
     idx, found_max_score = max(enumerate(scores), key=lambda x: x[1])

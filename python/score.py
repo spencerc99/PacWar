@@ -1,11 +1,11 @@
 from _PyPacwar import battle
-import io
+import inout
 
 fname = 'battle_indivs.txt'
+indivs = inout.read(fname)
 
 def battle_score(candidate):
-	indivs = io.read(fname)
-	return sum([score(candidate)]) / float(len(indivs))
+ 	return sum([score(candidate, other) for other in indivs]) / float(len(indivs))
 
 def score(candidate, compare):
 	rounds, candidate_survive, compare_survive = battle(candidate, compare)
