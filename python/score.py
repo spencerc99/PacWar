@@ -1,11 +1,13 @@
 from _PyPacwar import battle
-
 # Sums and averages score of all individuals
 def score(left, rights):
 	return float(sum([score_left(left, right) for right in rights])) / len(rights)
 
 def score_left(left, right):
 	return score_indiv(left, right)[0]
+
+def battle_score(candidate):
+	pass
 
 def score_indiv(left, right):
 	rounds, left_survive, right_survive = battle(left, right)
