@@ -73,25 +73,33 @@ def mutate(population, mutation_pct):
             if random.random() < mutation_pct:
                 indiv[i] += 1 % 4 # moves it to the right one
 
-def main():
+def main(storing=False):
     iterations = 75
     population = initial_state(200)
-    other_indiv = [3] * 50
+    other_indiv = [[gene]*50 for gene in gene_options]
     crossover_pct = 1
     mutation_pct = .005
     for i in xrange(iterations):
-        scores = [score(indiv, other_indiv)[0] for indiv in population] # Only caring about our score
+        scores = [score(indiv, other_indiv) for indiv in population] # Only caring about our score
         print max(scores)
         population, keep = normal_selection(population, scores)
         population = crossover(population, crossover_pct)
         population += keep
         mutate(population, mutation_pct)
 
-    scores = [score(indiv, other_indiv)[0] for indiv in population]
+    scores = [score(indiv, other_indiv) for indiv in population]
     # print population
     print scores
     idx, found_max_score = max(enumerate(scores), key=lambda x: x[1])
     print "Population with max score: ", population[idx]
     print "Max score", found_max_score
+    if storing and found_max_score > 15:
+        store(population[idx])
 
-if __name__ == "__main__": main()
+def store(candidate):
+    with open("best_indivs.txt", "a") as f:
+        f.write(' '.join([str(gene) for gene in candidate]) + "\n")
+
+if __name__ == "__main__":
+    for i in range(10):
+        main(True)
