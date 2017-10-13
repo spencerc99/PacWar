@@ -13,4 +13,4 @@ def main():
     genes = [generate_random_gene() for i in xrange(n)]
     io.write_list(f, genes)
 
-if __name__ == "__main__": main()
+if __name__ == '__main__': main()

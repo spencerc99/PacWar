@@ -2,29 +2,29 @@ from __future__ import print_function
 
 """
 f: Opened file
-gene: Array of [0,1,2,3] - length 50
+indiv: Array of [0,1,2,3] - length 50
 
-Writes gene to file.
+Writes indiv to file.
 """
-def write_gene(f, gene):
-    gene_string = reduce(lambda l,r: str(l) + ' ' + str(r), gene)
+def write_indiv(f, indiv):
+    gene_string = reduce(lambda l,r: str(l) + ' ' + str(r), indiv)
     print(gene_string, file=f)
 
 """
 f: Opened file
-genes: Array of 'gene'
+indivs: Array of 'gene'
 
-Writes genes to file.
+Writes indivs to file.
 """
-def write_list(f, genes):
-    map(lambda gene: write_gene(f, gene), genes)
+def write_list(f, indivs):
+    map(lambda indiv: write_indiv(f, indiv), indivs)
 
 """
 fname: File name
 
-Reads array of genes from the file.
+Reads array of indivs from the file.
 """
 def read(fname):
     with open(fname) as f:
         data = f.readlines()
-    return [gene.strip().split() for gene in data]
+    return [indiv.strip().split() for indiv in data]
