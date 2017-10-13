@@ -1,12 +1,15 @@
 from _PyPacwar import battle
+import io
+
+fname = 'battle_indivs.txt'
 
 def battle_score(candidate):
-	pass
+	indivs = io.read(fname)
+	return sum([score(candidate)]) / float(len(indivs))
 
-def score(left, right):
-	rounds, left_survive, right_survive = battle(left, right)
-	left = 0 if left_survive > right_survive else 1
-	right = 1 - left
+def score(candidate, compare):
+	rounds, candidate_survive, compare_survive = battle(candidate, compare)
+	i = 0 if candidate_survive > compare_survive else 1
 
 	lt_100 = (20, 0)
 	lt_200 = (19, 1)
@@ -18,21 +21,21 @@ def score(left, right):
 	tie = (10, 10)
 
 	if rounds < 100:
-		return lt_100[left], lt_100[right]
+		return lt_100[i]
 	elif rounds < 200:
-		return lt_200[left], lt_200[right]
+		return lt_200[i]
 	elif rounds < 300:
-		return lt_300[left], lt_300[right]
+		return lt_300[i]
 	elif rounds < 500:
-		return lt_500[left], lt_500[right]
+		return lt_500[i]
 	else:
-		if right_survive == 0 or left_survive == 0:
-			return lt_500[left], lt_500[right]
-		ratio = left_survive * 1.0 / right_survive if left_survive > right_survive else right_survive * 1.0 / left_survive
+		if candidate_survive == 0 or compare_survive == 0:
+			return lt_500[i]
+		ratio = candidate_survive * 1.0 / compare_survive if candidate_survive > compare_survive else compare_survive * 1.0 / candidate_survive
 		if ratio > 10:
-			return gt_10[left], gt_10[right]
+			return gt_10[i]
 		elif ratio > 3:
-			return gt_3[left], gt_3[right]
+			return gt_3[i]
 		elif ratio > 1.5:
-			return gt_1_5[left], gt_1_5[right]
-		return tie[left], tie[right]
+			return gt_1_5[i]
+		return tie[i]
