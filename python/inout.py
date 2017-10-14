@@ -1,22 +1,24 @@
 from __future__ import print_function
 
 random_file = 'random_indivs.txt'
-random_indivs = inout.read_indivs(random_file)
 best_file = 'best_indivs.txt'
 best_indivs = inout.read_pairs(best_file)
 top_file = 'top_indiv.txt'
 top_indiv = inout.read_pairs(top_file)
+N = 25
 
 def write_best(indiv, score):
-    for i in range(len(best_indivs)):
+    num_best = len(best_indivs)
+    for i in range(num_best):
         if score > best_indivs[i][0]:
-            if i == 0:
-                write_list(top_file, [(score, indiv)])
             best_indivs.insert(i, (score, indiv))
-            break
-    write_list(best_file, best_indivs[:-1])
-    gene_string = reduce(lambda l,r: str(l) + ' ' + str(r), indiv)
-    print(gene_string, file=f)
+            write_list(best_file, best_indivs[:-1])
+            return
+
+    if num_best < N:
+        best_indivs.append((score, indiv))
+        write_list(best_file, best_indivs)
+
 
 def write_list(fname, pairs):
     with open(fname, 'w') as f:
