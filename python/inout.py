@@ -44,4 +44,4 @@ def read_indivs(fname):
 def read_pairs(fname):
     with open(fname) as f:
         data = f.readlines()
-    return [(float(arr[0]), arr[1:]) for indiv in [line.rstrip().split() for line in data]]
+    return [(float(arr[0]), arr[1:]) for arr in [line.rstrip().split() for line in data]]
