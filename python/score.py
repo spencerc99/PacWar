@@ -1,15 +1,17 @@
+from sys import platform
 from _PyPacwar import battle
 import inout
 
+
 random_file = 'random_indivs.txt'
 random_indivs = inout.read_indivs(random_file)
-best_file = 'best_indivs.txt'
+best_file = 'spencer_indivs.txt' if platform == "darwin" else 'austin_indivs.txt'
 best_indivs = [pair[1] for pair in inout.read_pairs(best_file)]
 
 def overall_score(candidate):
     return 0.25 * random_battle_score(candidate) + \
-        0.5 * best_battle_score(candidate) + \
-        0.25 * top_battle_score(candidate)
+        0.65 * best_battle_score(candidate) + \
+        0.1 * top_battle_score(candidate)
 
 def top_battle_score(candidate):
     if not best_indivs:
