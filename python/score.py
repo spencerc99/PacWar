@@ -58,3 +58,5 @@ def score(candidate, compare):
 		elif ratio > 1.5:
 			return gt_1_5[i]
 		return tie[i]
+
+# print score(best_indivs[0], ameesh)
