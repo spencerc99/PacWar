@@ -72,7 +72,8 @@ def mutate(population, mutation_pct):
     for indiv in population:
         for i in range(50):
             if random.random() < mutation_pct:
-                indiv[i] += 1 % 4 # moves it to the right one
+                indiv[i] += 1
+                indiv[i] %= 4 # moves it to the right one
 
 def score_func(indiv, other_indiv):
     # return score.score(indiv, other_indiv)
@@ -103,11 +104,6 @@ def main(storing=False):
     print "Max score", found_max_score
     inout.write_best(population[idx], found_max_score)
 
-# def store(candidate):
-#     with open("best_indivs.txt", "a") as f:
-#         f.write(' '.join([str(gene) for gene in candidate]) + "\n")
-
 if __name__ == "__main__":
-    # for i in range(10):
-    #     main(True)
-    main(True)
+    for i in range(10):
+        main(True)

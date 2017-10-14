@@ -1,5 +1,5 @@
-from sys import platform
 from __future__ import print_function
+from sys import platform
 
 random_file = 'random_indivs.txt'
 best_file = 'spencer_indivs.txt' if platform == "darwin" else 'austin_indivs.txt'
@@ -11,7 +11,10 @@ def write_best(indiv, score):
     for i in range(num_best):
         if score > best_indivs[i][0]:
             best_indivs.insert(i, (score, indiv))
-            write_list(best_file, best_indivs[:-1])
+            if num_best < N:
+                write_list(best_file, best_indivs)
+            else:
+                write_list(best_file, best_indivs[:-1])
             return
 
     if num_best < N:
