@@ -5,8 +5,11 @@ import inout
 
 random_file = 'random_indivs.txt'
 random_indivs = inout.read_indivs(random_file)
-best_file = 'spencer_indivs.txt' if platform == "darwin" else 'austin_indivs.txt'
+best_file = 'spencer_indivs2.txt' if platform == "darwin" else 'austin_indivs.txt'
 best_indivs = [pair[1] for pair in inout.read_pairs(best_file)]
+
+def init():
+    best_indivs = [pair[1] for pair in inout.read_pairs(best_file)]
 
 def overall_score(candidate):
     return 0.25 * random_battle_score(candidate) + \
@@ -59,4 +62,12 @@ def score(candidate, compare):
 			return gt_1_5[i]
 		return tie[i]
 
-# print score(best_indivs[0], inout.read_indivs('ameesh.txt')[0])
+# austin = "0 1 0 2 0 0 0 1 0 3 1 1 2 3 0 0 3 3 3 0 3 2 2 2 2 1 2 3 1 1 2 1 2 3 1 2 2 3 1 3 1 1 1 1 1 0 0 1 3 3".split()
+# mine = "0 3 1 0 0 0 1 0 1 0 1 0 2 2 3 0 3 3 3 0 3 2 3 1 2 1 3 1 1 3 3 1 1 2 2 3 3 3 1 3 0 1 3 0 1 0 1 3 3 0".split()
+# sumeet = [0, 0, 3, 2, 0, 0, 0, 0, 1, 1, 0, 1, 2, 2, 2, 1, 0, 0, 3, 3, 1, 3, 1, 1, 2, 3, 3, 2, 3, 1, 2, 1, 3, 2, 3, 1, 2, 3, 3, 2, 3, 3, 1, 0, 2, 0, 1, 3, 1, 0]
+# print score(best_indivs[1], sumeet)
+# austin_indivs = [pair[1] for pair in inout.read_pairs('austin_indivs.txt')]
+#
+#
+# for indiv in best_indivs:
+#     print score(best_indivs[1], indiv)

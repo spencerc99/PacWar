@@ -1,3 +1,5 @@
 python/build/
 *.so
 *.pyc
+_PyPacwar.so
+
