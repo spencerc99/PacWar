@@ -84,7 +84,7 @@ def score_func(indiv, other_indiv):
 
 def main(storing=False):
     iterations = 25
-    population = initial_state(200)
+    population = initial_state(50)
     other_indiv = [[gene]*50 for gene in gene_options]
     crossover_pct = 1
     mutation_pct = .005
@@ -106,4 +106,5 @@ def main(storing=False):
 
 if __name__ == "__main__":
     for i in range(10):
+        score.init()
         main(True)
