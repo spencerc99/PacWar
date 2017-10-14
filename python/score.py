@@ -1,5 +1,5 @@
-from sys import platform
 from _PyPacwar import battle
+from sys import platform
 import inout
 
 
