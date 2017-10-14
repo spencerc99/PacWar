@@ -5,13 +5,20 @@ random_file = 'random_indivs.txt'
 random_indivs = inout.read_indivs(random_file)
 best_file = 'best_indivs.txt'
 best_indivs = [pair[1] for pair in inout.read_pairs(best_file)]
-top_file = 'top_indiv.txt'
-top_indiv = inout.read_pairs(top_file)[1]
+
+def overall_score(candidate):
+    return 0.25 * random_battle_score(candidate) + \
+        0.5 * best_battle_score(candidate) + \
+        0.25 * top_battle_score(candidate)
 
 def top_battle_score(candidate):
-    return score(candidate, top_indiv[0])
+    if not best_indivs:
+        return 0
+    return score(candidate, best_indivs[0])
 
 def best_battle_score(candidate):
+    if not best_indivs:
+        return 0
     return sum([score(candidate, other) for other in best_indivs]) / float(len(best_indivs))
 
 def random_battle_score(candidate):

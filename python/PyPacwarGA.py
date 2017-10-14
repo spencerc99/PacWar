@@ -2,6 +2,7 @@ import _PyPacwar
 import numpy
 import random
 import score
+import inout
 
 gene_options = [0, 1, 2, 3]
 
@@ -76,8 +77,9 @@ def mutate(population, mutation_pct):
 def score_func(indiv, other_indiv):
     # return score.score(indiv, other_indiv)
     # return score.random_battle_score(indiv)
-    return score.best_battle_score(indiv)
+    # return score.best_battle_score(indiv)
     # return score.top_battle_score(indiv)
+    return score.overall_score(indiv)
 
 def main(storing=False):
     iterations = 25
@@ -99,12 +101,11 @@ def main(storing=False):
     idx, found_max_score = max(enumerate(scores), key=lambda x: x[1])
     print "Population with max score: ", population[idx]
     print "Max score", found_max_score
-    if storing and found_max_score > 15:
-        store(population[idx])
+    inout.write_best(population[idx], found_max_score)
 
-def store(candidate):
-    with open("best_indivs.txt", "a") as f:
-        f.write(' '.join([str(gene) for gene in candidate]) + "\n")
+# def store(candidate):
+#     with open("best_indivs.txt", "a") as f:
+#         f.write(' '.join([str(gene) for gene in candidate]) + "\n")
 
 if __name__ == "__main__":
     # for i in range(10):
