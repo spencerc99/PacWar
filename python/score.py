@@ -1,11 +1,21 @@
 from _PyPacwar import battle
 import inout
 
-fname = 'battle_indivs.txt'
-indivs = inout.read(fname)
+random_file = 'random_indivs.txt'
+random_indivs = inout.read_indivs(random_file)
+best_file = 'best_indivs.txt'
+best_indivs = [pair[1] for pair in inout.read_pairs(best_file)]
+top_file = 'top_indiv.txt'
+top_indiv = inout.read_pairs(top_file)[1]
 
-def battle_score(candidate):
- 	return sum([score(candidate, other) for other in indivs]) / float(len(indivs))
+def top_battle_score(candidate):
+    return score(candidate, top_indiv[0])
+
+def best_battle_score(candidate):
+    return sum([score(candidate, other) for other in best_indivs]) / float(len(best_indivs))
+
+def random_battle_score(candidate):
+ 	return sum([score(candidate, other) for other in random_indivs]) / float(len(random_indivs))
 
 def score(candidate, compare):
 	rounds, candidate_survive, compare_survive = battle(candidate, compare)

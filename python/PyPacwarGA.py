@@ -1,7 +1,7 @@
 import _PyPacwar
 import numpy
 import random
-from score import score, battle_score
+import score
 
 gene_options = [0, 1, 2, 3]
 
@@ -74,8 +74,10 @@ def mutate(population, mutation_pct):
                 indiv[i] += 1 % 4 # moves it to the right one
 
 def score_func(indiv, other_indiv):
-    # return score(indiv, other_indiv)
-    return battle_score(indiv)
+    # return score.score(indiv, other_indiv)
+    # return score.random_battle_score(indiv)
+    return score.best_battle_score(indiv)
+    # return score.top_battle_score(indiv)
 
 def main(storing=False):
     iterations = 25
@@ -107,4 +109,4 @@ def store(candidate):
 if __name__ == "__main__":
     # for i in range(10):
     #     main(True)
-    main()
+    main(True)
