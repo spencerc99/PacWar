@@ -104,11 +104,6 @@ def main(storing=False):
     print "Max score", found_max_score
     inout.write_best(population[idx], found_max_score)
 
-# def store(candidate):
-#     with open("best_indivs.txt", "a") as f:
-#         f.write(' '.join([str(gene) for gene in candidate]) + "\n")
-
 if __name__ == "__main__":
     for i in range(10):
         main(True)
-    # main(True)

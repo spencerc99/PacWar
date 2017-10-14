@@ -59,4 +59,4 @@ def score(candidate, compare):
 			return gt_1_5[i]
 		return tie[i]
 
-# print score(best_indivs[0], ameesh)
+# print score(best_indivs[0], inout.read_indivs('ameesh.txt')[0])
