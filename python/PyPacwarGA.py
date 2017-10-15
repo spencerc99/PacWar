@@ -83,8 +83,8 @@ def score_func(indiv, other_indiv):
     return score.overall_score(indiv)
 
 def main(storing=False):
-    iterations = 25
-    population = initial_state(50)
+    iterations = 40
+    population = initial_state(200)
     other_indiv = [[gene]*50 for gene in gene_options]
     crossover_pct = 1
     mutation_pct = .005
@@ -105,6 +105,6 @@ def main(storing=False):
     inout.write_best(population[idx], found_max_score)
 
 if __name__ == "__main__":
-    for i in range(10):
+    for i in range(100):
         score.init()
         main(True)
