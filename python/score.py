@@ -2,12 +2,8 @@ from _PyPacwar import battle
 from sys import platform
 import inout
 
-<<<<<<< HEAD
 def init_best():
     return [pair[1] for pair in inout.read_pairs(best_file)]
-=======
-print inout
->>>>>>> 3e105cb36e6ca0fce2b0ab7a085b282f17a73086
 
 random_file = 'random_indivs.txt'
 random_indivs = inout.read_indivs(random_file)
