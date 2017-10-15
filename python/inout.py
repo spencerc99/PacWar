@@ -2,7 +2,7 @@ from __future__ import print_function
 from sys import platform
 
 random_file = 'random_indivs.txt'
-best_file = 'spencer_indivs2.txt' if platform == "darwin" else 'austin_indivs.txt'
+best_file = 'spencer_indivs.txt' if platform == "darwin" else 'austin_indivs.txt'
 N = 25
 
 def write_best(indiv, score):
