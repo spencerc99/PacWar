@@ -2,15 +2,25 @@ from _PyPacwar import battle
 from sys import platform
 import inout
 
-print inout
+def init_best():
+    return [pair[1] for pair in inout.read_pairs(best_file)]
 
 random_file = 'random_indivs.txt'
 random_indivs = inout.read_indivs(random_file)
 best_file = 'spencer_indivs.txt' if platform == "darwin" else 'austin_indivs.txt'
-best_indivs = [pair[1] for pair in inout.read_pairs(best_file)]
+best_indivs = init_best()
+N = 25
 
-def init():
-    best_indivs = [pair[1] for pair in inout.read_pairs(best_file)]
+def write_best(indiv, s):
+    best_indivs = init_best()
+    num_best = len(best_indivs)
+    best_indivs = [(overall_score(indiv), indiv) for indiv in best_indivs]
+    best_indivs.append((s, indiv))
+    best_indivs.sort(reverse=True, key=lambda x: x[0])
+    if num_best < N:
+        inout.write_list(best_file, best_indivs)
+    else:
+        inout.write_list(best_file, best_indivs[:-1])
 
 def overall_score(candidate):
     return 0.25 * random_battle_score(candidate) + \
