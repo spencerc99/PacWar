@@ -83,7 +83,7 @@ def score_func(indiv, other_indiv):
     return score.overall_score(indiv)
 
 def main(storing=False):
-    iterations = 35
+    iterations = 40
     population = initial_state(200)
     other_indiv = [[gene]*50 for gene in gene_options]
     crossover_pct = 1
