@@ -67,12 +67,12 @@ def score(candidate, compare):
 # sm = [0, 0, 0, 2, 0, 0, 0, 0, 1, 0, 1, 2, 2, 2, 0, 2, 3, 3, 0, 3, 3, 2, 1, 3, 2, 1, 3, 2, 1, 3, 2, 1, 3, 2, 1, 1, 2, 1, 1, 0, 1, 1, 3, 1, 3, 2, 1, 1, 0, 3]
 # sm2 = [0, 0, 3, 2, 0, 0, 0, 0, 1, 1, 0, 1, 2, 2, 2, 1, 0, 0, 3, 3, 1, 3, 1, 1, 2, 3, 3, 2, 3, 1, 2, 1, 3, 2, 3, 1, 2, 3, 3, 2, 3, 3, 1, 0, 2, 0, 1, 3, 1, 0]
 # print score(best_indivs[1], sm)
-austin_indivs = [pair[1] for pair in inout.read_pairs('austin_indivs.txt')]
+# austin_indivs = [pair[1] for pair in inout.read_pairs('austin_indivs.txt')]
 
 # best_file2 = 'spencer_indivs2.txt'
 # best_indivs2 = [pair[1] for pair in inout.read_pairs(best_file2)]
 #
 #
 
-for indiv in best_indivs:
-    print score(best_indivs[0], indiv)
+# for indiv in best_indivs:
+    # print score(best_indivs[0], indiv)
