@@ -2,6 +2,7 @@ from _PyPacwar import battle
 from sys import platform
 import inout
 
+print inout
 
 random_file = 'random_indivs.txt'
 random_indivs = inout.read_indivs(random_file)
@@ -67,12 +68,14 @@ def score(candidate, compare):
 # sm = [0, 0, 0, 2, 0, 0, 0, 0, 1, 0, 1, 2, 2, 2, 0, 2, 3, 3, 0, 3, 3, 2, 1, 3, 2, 1, 3, 2, 1, 3, 2, 1, 3, 2, 1, 1, 2, 1, 1, 0, 1, 1, 3, 1, 3, 2, 1, 1, 0, 3]
 # sm2 = [0, 0, 3, 2, 0, 0, 0, 0, 1, 1, 0, 1, 2, 2, 2, 1, 0, 0, 3, 3, 1, 3, 1, 1, 2, 3, 3, 2, 3, 1, 2, 1, 3, 2, 3, 1, 2, 3, 3, 2, 3, 3, 1, 0, 2, 0, 1, 3, 1, 0]
 # print score(best_indivs[1], sm)
-# austin_indivs = [pair[1] for pair in inout.read_pairs('austin_indivs.txt')]
+austin_indivs = [pair[1] for pair in inout.read_pairs('austin_indivs.txt')]
+beesh = [0, 0, 1, 0, 0, 2, 0, 0, 1, 1, 1, 1, 2, 0, 0, 2, 3, 0, 3, 3, 1, 2, 2, 1, 1, 1, 2, 1, 3, 3, 2, 2, 3, 2, 1, 1, 1, 1, 1, 1, 0, 1, 3, 0, 0, 1, 1, 3, 3, 1]
 
 # best_file2 = 'spencer_indivs2.txt'
 # best_indivs2 = [pair[1] for pair in inout.read_pairs(best_file2)]
 #
 #
+print score(best_indivs[0], beesh)
 
 # for indiv in best_indivs:
-    # print score(best_indivs[0], indiv)
+#     print score(best_indivs[-3], indiv)
