@@ -3,7 +3,7 @@ from sys import platform
 import score
 
 random_file = 'random_indivs.txt'
-best_file = 'spencer_indivs2.txt' if platform == "darwin" else 'austin_indivs.txt'
+best_file = 'spencer_indivs.txt' if platform == "darwin" else 'austin_indivs.txt'
 N = 25
 
 def write_best(indiv, score):
