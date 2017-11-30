@@ -1,7 +1,7 @@
 import random
 import inout
 
-n = 25
+n = 10
 
 def generate_random_gene():
     return [random.choice(xrange(4)) for i in xrange(50)]

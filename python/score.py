@@ -2,30 +2,38 @@ from _PyPacwar import battle
 from sys import platform
 import inout
 
-def init_best():
-    return [pair[1] for pair in inout.read_pairs(best_file)]
 
 random_file = 'random_indivs.txt'
 random_indivs = inout.read_indivs(random_file)
 best_file = 'spencer_indivs.txt' if platform == "darwin" else 'austin_indivs.txt'
-best_indivs = init_best()
-N = 25
+best_indivs = [pair[1] for pair in inout.read_pairs(best_file)]
 
-def write_best(indiv, s):
-    best_indivs = init_best()
+def init_best():
+    best_indivs = [pair[1] for pair in inout.read_pairs(best_file)]
+
+N = 100
+
+def sort_best():
+    init_best()
+    best = [(overall_score(i), i) for i in best_indivs]
+    best.sort(reverse=True, key=lambda x: x[0])
+    inout.write_list(best_file, best)
+
+def write_best(indiv):
+    init_best()
     num_best = len(best_indivs)
-    best_indivs = [(overall_score(indiv), indiv) for indiv in best_indivs]
-    best_indivs.append((s, indiv))
-    best_indivs.sort(reverse=True, key=lambda x: x[0])
+    best_indivs.append(indiv)
+    best = [(overall_score(i), i) for i in best_indivs]
+    best.sort(reverse=True, key=lambda x: x[0])
     if num_best < N:
-        inout.write_list(best_file, best_indivs)
+        inout.write_list(best_file, best)
     else:
-        inout.write_list(best_file, best_indivs[:-1])
+        inout.write_list(best_file, best[:N])
+    sort_best()
 
 def overall_score(candidate):
-    return 0.25 * random_battle_score(candidate) + \
-        0.65 * best_battle_score(candidate) + \
-        0.1 * top_battle_score(candidate)
+    return 0.1 * random_battle_score(candidate) + \
+        0.9 * best_battle_score(candidate)
 
 def top_battle_score(candidate):
     if not best_indivs:
@@ -73,19 +81,45 @@ def score(candidate, compare):
 			return gt_1_5[i]
 		return tie[i]
 
-# austin = "austin_indivs"
-# mine = "0 3 1 0 0 0 1 0 1 0 1 0 2 2 3 0 3 3 3 0 3 2 3 1 2 1 3 1 1 3 3 1 1 2 2 3 3 3 1 3 0 1 3 0 1 0 1 3 3 0".split()
-# sm = [0, 0, 0, 2, 0, 0, 0, 0, 1, 0, 1, 2, 2, 2, 0, 2, 3, 3, 0, 3, 3, 2, 1, 3, 2, 1, 3, 2, 1, 3, 2, 1, 3, 2, 1, 1, 2, 1, 1, 0, 1, 1, 3, 1, 3, 2, 1, 1, 0, 3]
-# sm2 = [0, 0, 3, 2, 0, 0, 0, 0, 1, 1, 0, 1, 2, 2, 2, 1, 0, 0, 3, 3, 1, 3, 1, 1, 2, 3, 3, 2, 3, 1, 2, 1, 3, 2, 3, 1, 2, 3, 3, 2, 3, 3, 1, 0, 2, 0, 1, 3, 1, 0]
-# print score(best_indivs[1], sm)
-austin_indivs = [pair[1] for pair in inout.read_pairs('austin_indivs.txt')]
-beesh = [0, 0, 1, 0, 0, 2, 0, 0, 1, 1, 1, 1, 2, 0, 0, 2, 3, 0, 3, 3, 1, 2, 2, 1, 1, 1, 2, 1, 3, 3, 2, 2, 3, 2, 1, 1, 1, 1, 1, 1, 0, 1, 3, 0, 0, 1, 1, 3, 3, 1]
+# mine = "0 0 0 2 0 0 0 0 1 1 1 1 2 2 2 2 0 0 3 0 1 2 1 1 2 1 3 2 3 2 2 3 1 2 3 1 3 2 3 1 3 3 1 3 3 0 0 3 1 1".split()
+# print overall_score(mine)
 
-# best_file2 = 'spencer_indivs2.txt'
-# best_indivs2 = [pair[1] for pair in inout.read_pairs(best_file2)]
-#
-#
-print score(best_indivs[0], beesh)
+def best_grid(num_top):
+    init_best()
+    print ' ' * 4 + reduce(lambda x,y: str(x) + ' ' * (3 - len(str(y))) + str(y), xrange(num_top))
+    for against, indiv in enumerate(best_indivs):
+        disp = [score(best_indivs[i], indiv) for i in xrange(num_top)]
+        print str(against) + ' ' * (5 - len(str(against)) - len(str(disp[0]))) + reduce(lambda x,y: str(x) + ' ' * (3 - len(str(y))) + str(y), disp)
 
-# for indiv in best_indivs:
-#     print score(best_indivs[-3], indiv)
+def best_lt_grid(num_top):
+    init_best()
+    print ' ' * 4 + reduce(lambda x,y: str(x) + ' ' * (3 - len(str(y))) + str(y), xrange(num_top))
+    for against, indiv in enumerate(best_indivs):
+        disp = [score(best_indivs[i], indiv) for i in xrange(num_top)]
+        loss_tie_disp = ['D' if d < 5 else 'L' if d < 10 else 'T' if d == 10 else ' ' for d in disp]
+        print str(against) + ' ' * (4 - len(str(against))) + reduce(lambda x,y: x + ' ' * 2 + y, loss_tie_disp)
+
+def against_best(test):
+    init_best()
+    for against, indiv in enumerate(best_indivs):
+        print against, score(test, indiv)
+
+def against_lt_best(test):
+    init_best()
+    for against, indiv in enumerate(best_indivs):
+        d = score(test, indiv)
+        print against, 'D' if d < 5 else 'L' if d < 10 else 'T' if d == 10 else ' '
+
+def confirm_scores():
+    init_best()
+    for indiv in best_indivs:
+        print overall_score(indiv)
+
+test1 = "0 3 1 0 0 0 0 0 0 3 1 3 0 0 2 0 3 3 3 3 3 2 3 1 2 1 1 2 1 1 2 1 3 1 1 1 2 1 1 3 1 1 3 1 1 2 0 1 3 1".split()
+test2 = [0, 3, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 2, 2, 0, 0, 3, 2, 3, 3, 3, 2, 1, 1, 2, 1, 1, 2, 1, 1, 1, 1, 1, 2, 1, 1, 2, 2, 1, 3, 0, 1, 1, 1, 2, 3, 1, 1, 2, 0]
+# print overall_score(test1)
+# best_grid(5)
+# best_lt_grid(5)
+# against_best(test1)
+# against_best(test2)
+# against_lt_best(test1)
